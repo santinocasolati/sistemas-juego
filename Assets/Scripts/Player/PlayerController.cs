@@ -13,10 +13,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private CinemachineVirtualCamera thirdPersonCamera;
     [SerializeField] private CinemachineVirtualCamera aimingCamera;
+    [SerializeField] private Transform weaponSlot;
+    [SerializeField] private GameObject initialWeaponPrefab;
+    [SerializeField] private Transform aimTarget;
 
     private RotationController rotationController;
     private MovementController movementController;
     private CameraController cameraController;
+    private WeaponController weaponController;
 
     private Rigidbody rb;
 
@@ -24,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private InputAction lookAction;
     private InputAction movementAction;
     private InputAction aimAction;
+    private InputAction shootAction;
 
     private void Awake()
     {
@@ -31,12 +36,14 @@ public class PlayerController : MonoBehaviour
         lookAction = playerInput.actions.FindAction("Look");
         movementAction = playerInput.actions.FindAction("Movement");
         aimAction = playerInput.actions.FindAction("Aim");
+        shootAction = playerInput.actions.FindAction("Shoot");
 
         rb = GetComponent<Rigidbody>();
 
         rotationController = new RotationController(rotationSpeed, transform, cameraLook, xLimits);
         movementController = new MovementController(rb, movementSpeed, GetComponentInChildren<Animator>());
         cameraController = new CameraController(thirdPersonCamera, aimingCamera);
+        weaponController = new WeaponController(weaponSlot, initialWeaponPrefab, aimTarget);
     }
 
     private void OnEnable()
@@ -45,6 +52,9 @@ public class PlayerController : MonoBehaviour
         
         aimAction.performed += _ => cameraController.SetAim(true);
         aimAction.canceled += _ => cameraController.SetAim(false);
+
+        shootAction.performed += _ => weaponController.ShootState(true);
+        shootAction.canceled += _ => weaponController.ShootState(false);
     }
 
     private void OnDisable()
@@ -53,6 +63,9 @@ public class PlayerController : MonoBehaviour
 
         aimAction.performed -= _ => cameraController.SetAim(true);
         aimAction.canceled -= _ => cameraController.SetAim(false);
+
+        shootAction.performed -= _ => weaponController.ShootState(true);
+        shootAction.canceled -= _ => weaponController.ShootState(false);
     }
 
     private void Update()
