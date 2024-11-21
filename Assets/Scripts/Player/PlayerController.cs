@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera thirdPersonCamera;
     [SerializeField] private CinemachineVirtualCamera aimingCamera;
     [SerializeField] private Transform weaponSlot;
-    [SerializeField] private GameObject initialWeaponPrefab;
     [SerializeField] private Transform aimTarget;
+    [SerializeField] private GameObject initialWeaponPrefab;
 
     private RotationController rotationController;
     private MovementController movementController;
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         rotationController = new RotationController(rotationSpeed, transform, cameraLook, xLimits);
         movementController = new MovementController(rb, movementSpeed, GetComponentInChildren<Animator>());
         cameraController = new CameraController(thirdPersonCamera, aimingCamera);
-        weaponController = new WeaponController(weaponSlot, initialWeaponPrefab, aimTarget);
+        weaponController = new WeaponController(weaponSlot, initialWeaponPrefab);
     }
 
     private void OnEnable()
@@ -71,5 +71,23 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         movementController?.UpdateMovement(movementAction.ReadValue<Vector2>(), transform);
+
+        CalculateAimTarget();
+    }
+
+    private void CalculateAimTarget()
+    {
+        Vector3 pos;
+
+        if (cameraController.isAiming)
+        {
+            pos = new Vector3(1.2f, .9f, 0);
+        } else
+        {
+            pos = new Vector3(.8f, .5f, 0);
+        }
+
+        Ray cameraRay = Camera.main.ViewportPointToRay(pos);
+        aimTarget.position = cameraRay.GetPoint(10);
     }
 }

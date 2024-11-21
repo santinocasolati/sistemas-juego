@@ -145,8 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37967392901b0f14581d4ebf38aa2f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gunTip: {fileID: 2704072891251769503}
-  _maxDistance: 50
-  _shootDelay: 0.5
-  _offset: {x: 0.0035, y: 0.2586, z: 0.0351}
-  _rotation: {x: 90, y: 0, z: 90}
+  gunTip: {fileID: 2704072891251769503}
+  maxDistance: 100
+  shootDelay: 0.25
+  offset: {x: 0.0035, y: 0.2586, z: 0.0351}
+  rotation: {x: 90, y: 0, z: 90}
+  shootSFX: {fileID: 8300000, guid: d0b289089e788c94e9e70ce00ed3f82b, type: 3}

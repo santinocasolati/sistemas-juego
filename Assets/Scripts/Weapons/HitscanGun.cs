@@ -4,29 +4,28 @@ using UnityEngine;
 
 public class HitscanGun : MonoBehaviour, IWeapon
 {
-    [SerializeField] private Transform _gunTip;
-    [SerializeField] private float _maxDistance;
-    [SerializeField] private float _shootDelay;
-    [SerializeField] private Vector3 _offset;
-    [SerializeField] private Vector3 _rotation;
+    [SerializeField] private Transform gunTip;
+    [SerializeField] private float maxDistance;
+    [SerializeField] private float shootDelay;
+    [SerializeField] private Vector3 offset;
+    [SerializeField] private Vector3 rotation;
+    [SerializeField] private AudioClip shootSFX;
 
-    private Transform _aimTarget;
+    private Vector3 hitPoint;
 
-    private bool _canShoot = false;
+    private bool _canShoot = true;
     private bool _isShooting = false;
-    public bool CanShoot
+    public bool IsShooting
     {
         set {
-            _canShoot = value;
             _isShooting = value;
         }
     }
 
-    public void Setup(Transform aimTarget)
+    public void Setup()
     {
-        transform.localPosition = _offset;
-        transform.localRotation = Quaternion.Euler(_rotation);
-        _aimTarget = aimTarget;
+        transform.localPosition = offset;
+        transform.localRotation = Quaternion.Euler(rotation);
     }
 
     public void Shoot()
@@ -34,15 +33,26 @@ public class HitscanGun : MonoBehaviour, IWeapon
         if (!_canShoot) return;
         _canShoot = false;
 
-        Vector3 direction = _aimTarget.position - _gunTip.position;
-        direction.Normalize();
+        Ray cameraRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Vector3 direction;
 
-        if (Physics.Raycast(_gunTip.position, direction, out RaycastHit hit, _maxDistance))
+        ServiceLocator.Instance.AccessService<AudioService>().PlayAudio(shootSFX);
+
+        if (Physics.Raycast(cameraRay, out RaycastHit cameraHit, maxDistance))
+        {
+            direction = (cameraHit.point - gunTip.position).normalized;
+        }
+        else
+        {
+            direction = (cameraRay.GetPoint(maxDistance) - gunTip.position).normalized;
+        }
+
+        if (Physics.Raycast(gunTip.position, direction, out RaycastHit hit, maxDistance))
         {
             SpawnHitEffect(hit.point, hit.normal);
         }
 
-        Invoke(nameof(ResetShoot), _shootDelay);
+        Invoke(nameof(ResetShoot), shootDelay);
     }
 
     private void Update()
@@ -53,12 +63,17 @@ public class HitscanGun : MonoBehaviour, IWeapon
 
     void SpawnHitEffect(Vector3 position, Vector3 normal)
     {
-        Debug.DrawLine(_gunTip.position, position, Color.red, 1f);
+        hitPoint = position;
     }
 
     private void ResetShoot()
     {
-        if (_isShooting)
-            _canShoot = true;
+        _canShoot = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(gunTip.position, hitPoint);
     }
 }

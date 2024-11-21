@@ -9,10 +9,9 @@ public class WeaponController
     private IWeapon _currentWeaponController;
     private Transform _aimTarget;
 
-    public WeaponController(Transform weaponSlot, GameObject initialWeaponPrefab, Transform aimTarget)
+    public WeaponController(Transform weaponSlot, GameObject initialWeaponPrefab)
     {
         _weaponSlot = weaponSlot;
-        _aimTarget = aimTarget;
 
         ChangeWeapon(initialWeaponPrefab);
     }
@@ -24,12 +23,12 @@ public class WeaponController
 
         _currentWeapon = GameObject.Instantiate(weaponPrefab, _weaponSlot);
         _currentWeaponController = _currentWeapon.GetComponent<IWeapon>();
-        _currentWeaponController.Setup(_aimTarget);
+        _currentWeaponController.Setup();
     }
 
     public void ShootState(bool isShooting)
     {
         if (_currentWeaponController != null)
-            _currentWeaponController.CanShoot = isShooting;
+            _currentWeaponController.IsShooting = isShooting;
     }
 }

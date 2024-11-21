@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IWeapon
 {
-    public bool CanShoot { set; }
+    public bool IsShooting { set; }
 
-    void Setup(Transform aimTarget);
+    void Setup();
     void Shoot();
 }
