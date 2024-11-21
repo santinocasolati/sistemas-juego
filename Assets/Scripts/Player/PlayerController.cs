@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         rotationController = new RotationController(rotationSpeed, transform, cameraLook, xLimits);
-        movementController = new MovementController(rb, movementSpeed);
+        movementController = new MovementController(rb, movementSpeed, GetComponentInChildren<Animator>());
         cameraController = new CameraController(thirdPersonCamera, aimingCamera);
     }
 

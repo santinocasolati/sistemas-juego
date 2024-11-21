@@ -6,11 +6,13 @@ public class MovementController
 {
     private Rigidbody _rb;
     private float _movementSpeed;
+    private Animator _animator;
 
-    public MovementController(Rigidbody rb, float movementSpeed)
+    public MovementController(Rigidbody rb, float movementSpeed, Animator animator)
     {
         _rb = rb;
         _movementSpeed = movementSpeed;
+        _animator = animator;
     }
 
     public void UpdateMovement(Vector2 input, Transform transform)
@@ -24,5 +26,9 @@ public class MovementController
         velocity.x = horizontalMovement.x;
         velocity.z = horizontalMovement.z;
         _rb.velocity = velocity;
+
+        Vector3 localVelocity = transform.InverseTransformDirection(_rb.velocity);
+        _animator.SetFloat("SpeedX", localVelocity.x);
+        _animator.SetFloat("SpeedY", localVelocity.z);
     }
 }
