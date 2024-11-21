@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class MovementController
 {
-    private CharacterController _characterController;
+    private Rigidbody _rb;
     private float _movementSpeed;
 
-    public MovementController(CharacterController characterController, float movementSpeed)
+    public MovementController(Rigidbody rb, float movementSpeed)
     {
-        _characterController = characterController;
+        _rb = rb;
         _movementSpeed = movementSpeed;
     }
 
-    public void UpdateMovement(Vector2 input, Transform transform, float deltaTime)
+    public void UpdateMovement(Vector2 input, Transform transform)
     {
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
-        Vector3 movement = (forward * input.y + right * input.x) * _movementSpeed * deltaTime;
-        _characterController.Move(movement);
+        Vector3 horizontalMovement = (forward * input.y + right * input.x) * _movementSpeed;
+
+        Vector3 velocity = _rb.velocity;
+        velocity.x = horizontalMovement.x;
+        velocity.z = horizontalMovement.z;
+        _rb.velocity = velocity;
     }
 }
