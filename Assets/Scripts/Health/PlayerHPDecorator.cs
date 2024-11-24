@@ -11,6 +11,8 @@ public class PlayerHPDecorator : MonoBehaviour, IHealth
 
     private HP _HP;
 
+    public bool isInvincible = false;
+
     private void Start()
     {
         _HP = new HP(maxHP);
@@ -33,7 +35,8 @@ public class PlayerHPDecorator : MonoBehaviour, IHealth
 
     public void Damage(float amount)
     {
-        _HP.Damage(amount);
+        if (!isInvincible)
+            _HP.Damage(amount);
     }
 
     public void Reset()

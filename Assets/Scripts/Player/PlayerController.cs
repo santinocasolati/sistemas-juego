@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform weaponSlot;
     [SerializeField] private Transform aimTarget;
     [SerializeField] private List<GameObject> weapons;
+    [SerializeField] private GameObject console;
 
     private RotationController rotationController;
     private MovementController movementController;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private InputAction shootAction;
     private InputAction weaponOneAction;
     private InputAction weaponTwoAction;
+    private InputAction toggleConsoleAction;
 
     private void Awake()
     {
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
         shootAction = playerInput.actions.FindAction("Shoot");
         weaponOneAction = playerInput.actions.FindAction("WeaponOne");
         weaponTwoAction = playerInput.actions.FindAction("WeaponTwo");
+        toggleConsoleAction = playerInput.actions.FindAction("ToggleConsole");
 
         rb = GetComponent<Rigidbody>();
 
@@ -62,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
         weaponOneAction.performed += _ => weaponController.ChangeWeapon(weapons[0]);
         weaponTwoAction.performed += _ => weaponController.ChangeWeapon(weapons[1]);
+
+        toggleConsoleAction.performed += _ => console.SetActive(!console.activeSelf);
     }
 
     private void OnDisable()
@@ -73,6 +78,11 @@ public class PlayerController : MonoBehaviour
 
         shootAction.performed -= _ => weaponController.ShootState(true);
         shootAction.canceled -= _ => weaponController.ShootState(false);
+
+        weaponOneAction.performed -= _ => weaponController.ChangeWeapon(weapons[0]);
+        weaponTwoAction.performed -= _ => weaponController.ChangeWeapon(weapons[1]);
+
+        toggleConsoleAction.performed -= _ => console.SetActive(!console.activeSelf);
     }
 
     private void Update()

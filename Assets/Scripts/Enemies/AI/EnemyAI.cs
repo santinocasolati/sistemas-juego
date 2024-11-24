@@ -27,6 +27,12 @@ public class EnemyAI : MonoBehaviour
         _stateMachine.ChangeState(new IdleState(this));
     }
 
+    private void OnEnable()
+    {
+        if (_stateMachine != null)
+            _stateMachine.ChangeState(new IdleState(this));
+    }
+
     private void Update()
     {
         _stateMachine.Update();
