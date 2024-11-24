@@ -7,11 +7,10 @@ public class HitscanGun : MonoBehaviour, IWeapon
     [SerializeField] private Transform gunTip;
     [SerializeField] private float maxDistance;
     [SerializeField] private float shootDelay;
+    [SerializeField] private float damage;
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 rotation;
     [SerializeField] private AudioClip shootSFX;
-
-    private Vector3 hitPoint;
 
     private bool _canShoot = true;
     private bool _isShooting = false;
@@ -49,7 +48,7 @@ public class HitscanGun : MonoBehaviour, IWeapon
 
         if (Physics.Raycast(gunTip.position, direction, out RaycastHit hit, maxDistance))
         {
-            SpawnHitEffect(hit.point, hit.normal);
+            Damage(hit.transform);
         }
 
         Invoke(nameof(ResetShoot), shootDelay);
@@ -61,19 +60,14 @@ public class HitscanGun : MonoBehaviour, IWeapon
             Shoot();
     }
 
-    void SpawnHitEffect(Vector3 position, Vector3 normal)
+    void Damage(Transform target)
     {
-        hitPoint = position;
+        IHealth health = target.gameObject.GetComponent<IHealth>();
+        health?.Damage(damage);
     }
 
     private void ResetShoot()
     {
         _canShoot = true;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(gunTip.position, hitPoint);
     }
 }

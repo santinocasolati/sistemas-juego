@@ -27,8 +27,16 @@ public class MovementController
         velocity.z = horizontalMovement.z;
         _rb.velocity = velocity;
 
+        float smoothTime = 0.1f;
+        float currentSpeedX = _animator.GetFloat("SpeedX");
+        float currentSpeedY = _animator.GetFloat("SpeedY");
+
         Vector3 localVelocity = transform.InverseTransformDirection(_rb.velocity);
-        _animator.SetFloat("SpeedX", localVelocity.x);
-        _animator.SetFloat("SpeedY", localVelocity.z);
+
+        float smoothedSpeedX = Mathf.Lerp(currentSpeedX, localVelocity.x, Time.deltaTime / smoothTime);
+        float smoothedSpeedY = Mathf.Lerp(currentSpeedY, localVelocity.z, Time.deltaTime / smoothTime);
+
+        _animator.SetFloat("SpeedX", smoothedSpeedX);
+        _animator.SetFloat("SpeedY", smoothedSpeedY);
     }
 }

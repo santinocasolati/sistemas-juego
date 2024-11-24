@@ -148,6 +148,7 @@ MonoBehaviour:
   gunTip: {fileID: 2704072891251769503}
   maxDistance: 100
   shootDelay: 0.25
+  damage: 10
   offset: {x: 0.0035, y: 0.2586, z: 0.0351}
   rotation: {x: 90, y: 0, z: 90}
   shootSFX: {fileID: 8300000, guid: d0b289089e788c94e9e70ce00ed3f82b, type: 3}
