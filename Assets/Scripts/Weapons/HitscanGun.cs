@@ -11,6 +11,7 @@ public class HitscanGun : MonoBehaviour, IWeapon
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 rotation;
     [SerializeField] private AudioClip shootSFX;
+    [SerializeField] private LayerMask layerMask;
 
     private bool _canShoot = true;
     private bool _isShooting = false;
@@ -37,7 +38,7 @@ public class HitscanGun : MonoBehaviour, IWeapon
 
         ServiceLocator.Instance.AccessService<AudioService>().PlayAudio(shootSFX);
 
-        if (Physics.Raycast(cameraRay, out RaycastHit cameraHit, maxDistance))
+        if (Physics.Raycast(cameraRay, out RaycastHit cameraHit, maxDistance, layerMask))
         {
             direction = (cameraHit.point - gunTip.position).normalized;
         }
@@ -46,7 +47,7 @@ public class HitscanGun : MonoBehaviour, IWeapon
             direction = (cameraRay.GetPoint(maxDistance) - gunTip.position).normalized;
         }
 
-        if (Physics.Raycast(gunTip.position, direction, out RaycastHit hit, maxDistance))
+        if (Physics.Raycast(gunTip.position, direction, out RaycastHit hit, maxDistance, layerMask))
         {
             Damage(hit.transform);
         }

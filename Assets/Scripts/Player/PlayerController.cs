@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
         if (cameraController.isAiming)
         {
-            pos = new Vector3(1.2f, .9f, 0);
+            pos = new Vector3(1.2f, .5f, 0);
         } else
         {
             pos = new Vector3(.8f, .5f, 0);

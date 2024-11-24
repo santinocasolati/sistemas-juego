@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHPDecorator : MonoBehaviour, IHealth
 {
     [SerializeField] private float maxHP;
+    [SerializeField] private string enemyName;
 
     private HP _HP;
 
@@ -26,6 +27,11 @@ public class EnemyHPDecorator : MonoBehaviour, IHealth
 
     private void HandleDeath()
     {
-        Destroy(gameObject);
+        ServiceLocator.Instance.AccessService<EnemyFactoryService>().StoreEnemy(enemyName, gameObject);
+    }
+
+    public void Reset()
+    {
+        _HP.Reset();
     }
 }

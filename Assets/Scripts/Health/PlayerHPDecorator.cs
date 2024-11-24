@@ -10,11 +10,12 @@ public class PlayerHPDecorator : MonoBehaviour, IHealth
 
     private HP _HP;
 
-    private void Awake()
+    private void Start()
     {
         _HP = new HP(maxHP);
 
         _HP.OnHPModified += value => hpSlider.value = value;
+        hpSlider.value = _HP.CurrentHPPercentage;
     }
 
     public void Heal(float amount)
@@ -25,5 +26,10 @@ public class PlayerHPDecorator : MonoBehaviour, IHealth
     public void Damage(float amount)
     {
         _HP.Damage(amount);
+    }
+
+    public void Reset()
+    {
+        _HP.Reset();
     }
 }
