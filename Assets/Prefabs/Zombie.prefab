@@ -176,9 +176,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRange: 10
   attackRange: 2
-  attackDamage: 5
-  moveSpeed: 1
-  attackCooldown: 2
+  attackDamage: 10
+  moveSpeed: 0.5
+  attackCooldown: 4
 --- !u!95 &7787594624166179570
 Animator:
   serializedVersion: 5

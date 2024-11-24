@@ -320,8 +320,9 @@ MonoBehaviour:
   aimingCamera: {fileID: 112930547}
   weaponSlot: {fileID: 2106728560}
   aimTarget: {fileID: 1791005672}
-  initialWeaponPrefab: {fileID: 4977545137741426898, guid: aa385034bf3978d43a2c55aa539b47d7,
-    type: 3}
+  weapons:
+  - {fileID: 4977545137741426898, guid: aa385034bf3978d43a2c55aa539b47d7, type: 3}
+  - {fileID: 0}
 --- !u!114 &113987906
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera aimingCamera;
     [SerializeField] private Transform weaponSlot;
     [SerializeField] private Transform aimTarget;
-    [SerializeField] private GameObject initialWeaponPrefab;
+    [SerializeField] private List<GameObject> weapons;
 
     private RotationController rotationController;
     private MovementController movementController;
@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     private InputAction movementAction;
     private InputAction aimAction;
     private InputAction shootAction;
+    private InputAction weaponOneAction;
+    private InputAction weaponTwoAction;
 
     private void Awake()
     {
@@ -37,13 +39,15 @@ public class PlayerController : MonoBehaviour
         movementAction = playerInput.actions.FindAction("Movement");
         aimAction = playerInput.actions.FindAction("Aim");
         shootAction = playerInput.actions.FindAction("Shoot");
+        weaponOneAction = playerInput.actions.FindAction("WeaponOne");
+        weaponTwoAction = playerInput.actions.FindAction("WeaponTwo");
 
         rb = GetComponent<Rigidbody>();
 
         rotationController = new RotationController(rotationSpeed, transform, cameraLook, xLimits);
         movementController = new MovementController(rb, movementSpeed, GetComponentInChildren<Animator>());
         cameraController = new CameraController(thirdPersonCamera, aimingCamera);
-        weaponController = new WeaponController(weaponSlot, initialWeaponPrefab);
+        weaponController = new WeaponController(weaponSlot, weapons[0]);
     }
 
     private void OnEnable()
@@ -55,6 +59,9 @@ public class PlayerController : MonoBehaviour
 
         shootAction.performed += _ => weaponController.ShootState(true);
         shootAction.canceled += _ => weaponController.ShootState(false);
+
+        weaponOneAction.performed += _ => weaponController.ChangeWeapon(weapons[0]);
+        weaponTwoAction.performed += _ => weaponController.ChangeWeapon(weapons[1]);
     }
 
     private void OnDisable()
