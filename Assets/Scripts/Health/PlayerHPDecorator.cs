@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHPDecorator : MonoBehaviour, IHealth
@@ -16,6 +17,13 @@ public class PlayerHPDecorator : MonoBehaviour, IHealth
 
         _HP.OnHPModified += value => hpSlider.value = value;
         hpSlider.value = _HP.CurrentHPPercentage;
+
+        _HP.OnDeath += Death;
+    }
+
+    private void Death()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 
     public void Heal(float amount)
