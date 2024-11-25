@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1122b3f3a217e594e841a9a45ac1b6d6, type: 3}
   m_Name: Heal Player
   m_EditorClassIdentifier: 
+  _helpMsg: '''heal number'' to heal the player'
   _aliases:
   - heal
   - healPlayer

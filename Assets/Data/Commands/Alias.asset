@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8aaf8ede5d420c49a46871e2068b375, type: 3}
-  m_Name: Kill Player
+  m_Script: {fileID: 11500000, guid: 90fc5bc465cb09e4b8e659d63f22c319, type: 3}
+  m_Name: Alias
   m_EditorClassIdentifier: 
-  _helpMsg: '''kill'' to kill the player'
+  _helpMsg: '''alias command'' to show all the aliases of a command'
   _aliases:
-  - kill
-  - killPlayer
-  - killplayer
-  - kp
+  - alias
+  - al
+  - aliases

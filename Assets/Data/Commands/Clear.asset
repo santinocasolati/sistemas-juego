@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8aaf8ede5d420c49a46871e2068b375, type: 3}
-  m_Name: Kill Player
+  m_Script: {fileID: 11500000, guid: 59f7289598b38414280fccf98fd5de06, type: 3}
+  m_Name: Clear
   m_EditorClassIdentifier: 
-  _helpMsg: '''kill'' to kill the player'
+  _helpMsg: '''clear'' to clear the console'
   _aliases:
-  - kill
-  - killPlayer
-  - killplayer
-  - kp
+  - clear
+  - cls

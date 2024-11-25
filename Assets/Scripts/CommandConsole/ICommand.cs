@@ -3,5 +3,5 @@ using System.Collections.Generic;
 
 public interface ICommand
 {
-    void Execute(string[] args);
+    string[] Execute(string[] args);
 }

@@ -5,14 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Commands/Heal Player")]
 public class CmdHealPlayer : Command
 {
-    public override void Execute(string[] args)
+    public override string[] Execute(string[] args)
     {
-        if (args.Length != 1)
-        {
-            Debug.LogError("Wrong arguments for that command");
-            return;
-        }
-
         GameObject.FindGameObjectWithTag("Player").GetComponent<IHealth>().Heal(float.Parse(args[0]));
+        return new[] { $"Player healed by {float.Parse(args[0])} points" };
+    }
+
+    public override string[] Execute()
+    {
+        return new[] { "Wrong arguments for that command" };
     }
 }

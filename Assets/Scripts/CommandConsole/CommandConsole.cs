@@ -7,7 +7,11 @@ using UnityEngine;
 public class CommandConsole : MonoBehaviour
 {
     [SerializeField] private TMP_InputField inputField;
-    [SerializeField] private Command[] registeredCommands;
+    [SerializeField] private Transform logParent;
+    [SerializeField] private GameObject logPrefab;
+    [SerializeField] public Command[] registeredCommands;
+
+    private List<GameObject> logs = new();
 
     private void OnEnable()
     {
@@ -17,7 +21,7 @@ public class CommandConsole : MonoBehaviour
 
     public void Execute()
     {
-        if (inputField.text.Length > 0)
+        if (inputField.text.Length > 0) { }
             ExecuteCommand(inputField.text);
     }
 
@@ -30,13 +34,34 @@ public class CommandConsole : MonoBehaviour
         Command selectedCommand = registeredCommands.FirstOrDefault(c => c.Aliases.Contains(inputCommand));
 
         if (selectedCommand != null)
-            selectedCommand.Execute(args);
-        else
-            Debug.LogError($"Command '{inputCommand}' not recognized");
+        {
+            if (args.Length > 0)
+                LogToConsole(selectedCommand.Execute(args));
+            else
+                LogToConsole(selectedCommand.Execute());
+        } else
+        {
+            LogToConsole(new[] { $"Command '{inputCommand}' not recognized" });
+        }
 
         inputField.text = "";
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        transform.parent.gameObject.SetActive(false);
+    }
+
+    private void LogToConsole(string[] log)
+    {
+        foreach (string l in log)
+        {
+            GameObject textLog = Instantiate(logPrefab, logParent);
+            textLog.GetComponent<TMP_Text>().text = l;
+            logs.Add(textLog);
+        }
+    }
+
+    internal void Clear()
+    {
+        foreach (GameObject textLog in logs)
+        {
+            Destroy(textLog);
+        }
     }
 }

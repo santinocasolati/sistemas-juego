@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8aaf8ede5d420c49a46871e2068b375, type: 3}
-  m_Name: Kill Player
+  m_Script: {fileID: 11500000, guid: 9750afe37b9d18e408eb561de866cb1e, type: 3}
+  m_Name: Help
   m_EditorClassIdentifier: 
-  _helpMsg: '''kill'' to kill the player'
+  _helpMsg: '''help'' to show this dialog or ''help command'' to get help of a specific
+    command'
   _aliases:
-  - kill
-  - killPlayer
-  - killplayer
-  - kp
+  - h
+  - '?'
+  - help
+  - Help

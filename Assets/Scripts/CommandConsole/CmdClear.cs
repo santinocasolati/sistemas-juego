@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Commands/Kill Player")]
-public class CmdKillPlayer : Command
+[CreateAssetMenu(menuName = "Commands/Clear Console")]
+public class CmdClear : Command
 {
     public override string[] Execute(string[] args)
     {
@@ -12,7 +13,9 @@ public class CmdKillPlayer : Command
 
     public override string[] Execute()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<IHealth>().Damage(9999999999);
-        return new[] { "Player Killed" };
+        CommandConsole console = FindObjectOfType<CommandConsole>();
+        console.Clear();
+
+        return new[] { "Console cleared" };
     }
 }

@@ -5,14 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Commands/God Mode")]
 public class CmdGodMode : Command
 {
-    public override void Execute(string[] args)
+    public override string[] Execute(string[] args)
     {
-        if (args.Length != 1)
-        {
-            Debug.LogError("Wrong arguments for that command");
-            return;
-        }
-
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHPDecorator>().isInvincible = bool.Parse(args[0]);
+        return new[] { $"God Mode set to {bool.Parse(args[0])}" };
+    }
+
+    public override string[] Execute()
+    {
+        return new[] { "Wrong arguments for that command" };
     }
 }

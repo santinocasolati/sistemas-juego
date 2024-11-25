@@ -190,6 +190,17 @@
                     "action": "ToggleConsole",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c78be03a-6a10-4bf9-a55d-e4cf548dd7b0",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleConsole",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
