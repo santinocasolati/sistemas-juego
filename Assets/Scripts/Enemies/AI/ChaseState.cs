@@ -20,7 +20,7 @@ public class ChaseState : IState
     {
         _enemyAI.MoveTowardsPlayer();
 
-        if (_enemyAI.IsPlayerInAttackRange())
+        if (_enemyAI.IsPlayerInAttackRange() && _enemyAI.canAttack)
         {
             _enemyAI.ChangeState(new AttackState(_enemyAI));
         }

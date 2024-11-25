@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviour
     private Animator _animator;
     private Rigidbody _rigidbody;
 
-    private bool _canAttack = true;
+    public bool canAttack = true;
 
     private void Start()
     {
@@ -66,9 +66,9 @@ public class EnemyAI : MonoBehaviour
 
     public void StartAttack()
     {
-        if (!_canAttack) return;
+        if (!canAttack) return;
 
-        _canAttack = false;
+        canAttack = false;
 
         SetAnimation("Attack");
 
@@ -79,7 +79,7 @@ public class EnemyAI : MonoBehaviour
 
     private void ResetAttackCooldown()
     {
-        _canAttack = true;
+        canAttack = true;
     }
 
     public void SetAnimation(string animationState)

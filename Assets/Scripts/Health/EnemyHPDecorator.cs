@@ -27,6 +27,7 @@ public class EnemyHPDecorator : MonoBehaviour, IHealth
 
     private void HandleDeath()
     {
+        ServiceLocator.Instance.AccessService<ScoreService>().AddScore(1);
         ServiceLocator.Instance.AccessService<EnemyFactoryService>().StoreEnemy(enemyName, gameObject);
     }
 
