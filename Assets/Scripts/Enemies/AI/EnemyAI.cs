@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private float detectionRange = 10f;
-    [SerializeField] private float attackRange = 2f;
-    [SerializeField] private float attackDamage = 5f;
-    [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private float attackCooldown = 2f;
+    [SerializeField] private EnemyDataSO enemyData;
 
     private StateMachine _stateMachine;
     private Transform _player;
@@ -45,18 +41,18 @@ public class EnemyAI : MonoBehaviour
 
     public bool IsPlayerInDetectionRange()
     {
-        return Vector3.Distance(transform.position, _player.position) <= detectionRange;
+        return Vector3.Distance(transform.position, _player.position) <= enemyData.detectionRange;
     }
 
     public bool IsPlayerInAttackRange()
     {
-        return Vector3.Distance(transform.position, _player.position) <= attackRange;
+        return Vector3.Distance(transform.position, _player.position) <= enemyData.attackRange;
     }
 
     public void MoveTowardsPlayer()
     {
         Vector3 direction = (_player.position - transform.position).normalized;
-        _rigidbody.velocity = direction * moveSpeed;
+        _rigidbody.velocity = direction * enemyData.moveSpeed;
 
         if (direction != Vector3.zero)
         {
@@ -72,9 +68,9 @@ public class EnemyAI : MonoBehaviour
 
         SetAnimation("Attack");
 
-        _player.gameObject.GetComponent<IHealth>().Damage(attackDamage);
+        _player.gameObject.GetComponent<IHealth>().Damage(enemyData.attackDamage);
 
-        Invoke(nameof(ResetAttackCooldown), attackCooldown);
+        Invoke(nameof(ResetAttackCooldown), enemyData.attackCooldown);
     }
 
     private void ResetAttackCooldown()

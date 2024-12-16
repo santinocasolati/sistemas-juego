@@ -32,7 +32,7 @@ public class Spawner : MonoBehaviour
         float randomZ = Random.Range(_minZ, _maxZ);
         Vector3 spawnPosition = new Vector3(randomX, _yPos, randomZ);
 
-        GameObject enemy = ServiceLocator.Instance.AccessService<EnemyFactoryService>().CreateEnemy(enemies[Random.Range(0, enemies.Count)]);
+        GameObject enemy = ServiceLocator.Instance.AccessService<EnemyFactoryService>().CreateItem(enemies[Random.Range(0, enemies.Count)]);
         enemy.transform.position = spawnPosition;
         enemy.SetActive(true);
 

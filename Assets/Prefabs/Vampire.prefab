@@ -1059,8 +1059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d79294f7c330340834ff8dd5783cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
-  enemyName: Vampire
+  enemyData: {fileID: 11400000, guid: a07e6d264b568194eba7f4b1c89a2311, type: 2}
 --- !u!114 &-4532452261030890060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,11 +1072,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01981fb35f4e78948aa93d7df9275c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 5000
-  attackRange: 2
-  attackDamage: 5
-  moveSpeed: 6
-  attackCooldown: 2
+  enemyData: {fileID: 11400000, guid: a07e6d264b568194eba7f4b1c89a2311, type: 2}
+  canAttack: 1
 --- !u!95 &-1072161369916766139
 Animator:
   serializedVersion: 5

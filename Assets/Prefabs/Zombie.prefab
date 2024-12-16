@@ -144,8 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d79294f7c330340834ff8dd5783cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 50
-  enemyName: Zombie
+  enemyData: {fileID: 11400000, guid: 72135ac15668d7a49833380b46f19b26, type: 2}
 --- !u!114 &8957021866554308101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,11 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01981fb35f4e78948aa93d7df9275c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 5000
-  attackRange: 2
-  attackDamage: 10
-  moveSpeed: 4
-  attackCooldown: 4
+  enemyData: {fileID: 11400000, guid: 72135ac15668d7a49833380b46f19b26, type: 2}
+  canAttack: 1
 --- !u!95 &7787594624166179570
 Animator:
   serializedVersion: 5

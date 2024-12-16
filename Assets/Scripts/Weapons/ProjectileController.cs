@@ -48,6 +48,6 @@ public class ProjectileController : MonoBehaviour
 
     private void EliminateProjectile()
     {
-        ServiceLocator.Instance.AccessService<ProjectileFactoryService>().StoreProjectile(projectileName, gameObject);
+        ServiceLocator.Instance.AccessService<ProjectileFactoryService>().StoreItem(projectileName, gameObject);
     }
 }

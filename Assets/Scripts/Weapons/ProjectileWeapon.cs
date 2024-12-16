@@ -12,7 +12,7 @@ public class ProjectileWeapon : BaseWeapon
 
         base.Shoot();
 
-        GameObject projectile = ServiceLocator.Instance.AccessService<ProjectileFactoryService>().CreateProjectile(projectileName);
+        GameObject projectile = ServiceLocator.Instance.AccessService<ProjectileFactoryService>().CreateItem(projectileName);
         Vector3 direction = (Camera.main.transform.position + Camera.main.transform.forward * 100f) - gunTip.position;
         direction.Normalize();
 

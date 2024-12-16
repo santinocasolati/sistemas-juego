@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc0a5f14d582e34f84e34f071250352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableProjectiles:
+  availableItems:
   - name: default
     prefab: {fileID: 605481039335463330, guid: e008d3a7b85943944a25066e15d2eb39, type: 3}
 --- !u!1 &8400808
@@ -4385,7 +4385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f487a198399a54fb2262c39983a529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableEnemies:
+  availableItems:
   - name: Vampire
     prefab: {fileID: 27705579893251326, guid: b5f3c72f73674064fa0d5c267c01ac43, type: 3}
   - name: Zombie

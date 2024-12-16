@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class EnemyHPDecorator : MonoBehaviour, IHealth
 {
-    [SerializeField] private float maxHP;
-    [SerializeField] private string enemyName;
+    [SerializeField] private EnemyDataSO enemyData;
 
     private HP _HP;
 
     private void Awake()
     {
-        _HP = new HP(maxHP);
+        _HP = new HP(enemyData.maxHP);
         _HP.OnDeath += HandleDeath;
     }
 
@@ -28,7 +27,7 @@ public class EnemyHPDecorator : MonoBehaviour, IHealth
     private void HandleDeath()
     {
         ServiceLocator.Instance.AccessService<ScoreService>().AddScore(1);
-        ServiceLocator.Instance.AccessService<EnemyFactoryService>().StoreEnemy(enemyName, gameObject);
+        ServiceLocator.Instance.AccessService<EnemyFactoryService>().StoreItem(enemyData.enemyName, gameObject);
     }
 
     public void Reset()
